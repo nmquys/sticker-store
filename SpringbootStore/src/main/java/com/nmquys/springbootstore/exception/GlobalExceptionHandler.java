@@ -3,6 +3,7 @@ package com.nmquys.springbootstore.exception;
 import com.nmquys.springbootstore.dto.ErrorResponseDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -19,11 +20,13 @@ import java.util.Set;
 
 //trả về JSON có cấu trúc khi có lỗi
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler
 {
     @ExceptionHandler(Exception.class) //chặn mọi loại lỗi
     public ResponseEntity<ErrorResponseDto> handleGlobalException(Exception exception, WebRequest webRequest)
     {
+        log.error("An exception occurred due to: {}", exception.getMessage());
         ErrorResponseDto errorResponseDto =
                 new ErrorResponseDto(webRequest.getDescription(false),
                                                                  HttpStatus.INTERNAL_SERVER_ERROR,
@@ -35,6 +38,7 @@ public class GlobalExceptionHandler
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException exception)
     {
+        log.error("An exception occurred due to: {}", exception.getMessage());
         Map<String, String> errors = new HashMap<>();
         List<FieldError> fieldErrorList = exception.getBindingResult().getFieldErrors();
         fieldErrorList.forEach(error ->
@@ -46,6 +50,7 @@ public class GlobalExceptionHandler
     public ResponseEntity<Map<String, String>> handleConstraintViolationException(
             ConstraintViolationException exception)
     {
+        log.error("An exception occurred due to: {}", exception.getMessage());
         Map<String, String> errors = new HashMap<>();
         Set<ConstraintViolation<?>> constraintViolationSet = exception.getConstraintViolations();
         constraintViolationSet.forEach( violation ->

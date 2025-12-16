@@ -1,0 +1,47 @@
+package com.nmquys.springbootstore.controller;
+
+import com.nmquys.springbootstore.scopes.ApplicationScopedBean;
+import com.nmquys.springbootstore.scopes.RequestScopedBean;
+import com.nmquys.springbootstore.scopes.SessionScopedBean;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/scope")
+@RequiredArgsConstructor
+public class ScopeController
+{
+    private final RequestScopedBean requestScopedBean;
+    private final SessionScopedBean sessionScopedBean;
+    private final ApplicationScopedBean applicationScopedBean;
+
+    @GetMapping("/request")
+    public ResponseEntity<String> testRequestScope()
+    {
+        requestScopedBean.setUserName("Jane Doe");
+        return ResponseEntity.ok().body(requestScopedBean.getUserName());
+    }
+
+    @GetMapping("/session")
+    public ResponseEntity<String> testSessionScope()
+    {
+        sessionScopedBean.setUserName("Jane Doe");
+        return ResponseEntity.ok().body(sessionScopedBean.getUserName());
+    }
+
+    @GetMapping("/application")
+    public ResponseEntity<Integer> testApplicationScope()
+    {
+        applicationScopedBean.increamentVisitorCount();
+        return ResponseEntity.ok().body(applicationScopedBean.getVisitorCount());
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> testScope()
+    {
+        return ResponseEntity.ok().body(requestScopedBean.getUserName());
+    }
+}

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/contacts")
-@RequiredArgsConstructor
+@RequiredArgsConstructor    //tu dong tao cac constructor cho cac final
 public class ContactController {
 
     private final IContactService iContactService;

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Sticker_Store.iml" filepath="$PROJECT_DIR$/.idea/Sticker_Store.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Sticker-Store.iml" filepath="$PROJECT_DIR$/.idea/Sticker-Store.iml" />
     </modules>
   </component>
 </project>

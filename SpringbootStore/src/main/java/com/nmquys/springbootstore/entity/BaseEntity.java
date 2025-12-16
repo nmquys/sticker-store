@@ -22,21 +22,21 @@ import java.time.Instant;
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity
 {
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     @CreatedDate
     @CreationTimestamp
     private Instant createdAt;
 
     @CreatedBy
-    @Column(name = "created_by", nullable = false, length = 20)
+    @Column(name = "created_by", nullable = false, length = 20, updatable = false)
     private String createdBy;
 
     @LastModifiedDate
     @CreatedBy
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", insertable = false)
     private Instant updatedAt;
 
-    @Column(name = "updated_by", length = 20)
+    @Column(name = "updated_by", length = 20, insertable = false)
     @LastModifiedBy
     private String updatedBy;
 }
