@@ -29,44 +29,10 @@ const routeDefinitions = createRoutesFromElements(
     <Route path="/login" element={<Login />} />
     <Route path="/cart" element={<Cart />} />
     <Route path="/products/:productId" element={<ProductDetail />} />
-  </Route>
+  </Route>,
 );
 
 const appRouter = createBrowserRouter(routeDefinitions);
-
-// const appRouter = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//     errorElement: <ErrorPage />,
-//     children: [
-//       {
-//         index: true,
-//         element: <Home />,
-//       },
-//       {
-//         path: "/home",
-//         element: <Home />,
-//       },
-//       {
-//         path: "/about",
-//         element: <About />,
-//       },
-//       {
-//         path: "/contact",
-//         element: <Contact />,
-//       },
-//       {
-//         path: "/login",
-//         element: <Login />,
-//       },
-//       {
-//         path: "/cart",
-//         element: <Cart />,
-//       },
-//     ],
-//   },
-// ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -81,5 +47,5 @@ createRoot(document.getElementById("root")).render(
       theme={localStorage.getItem("theme") === "dark" ? "dark" : "light"}
       transition={Bounce}
     />
-  </StrictMode>
+  </StrictMode>,
 );

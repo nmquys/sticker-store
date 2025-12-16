@@ -1,15 +1,16 @@
 package com.nmquys.springbootstore.controller;
 
+import com.nmquys.springbootstore.dto.ErrorResponseDto;
 import com.nmquys.springbootstore.dto.ProductDto;
 import com.nmquys.springbootstore.service.IProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -24,5 +25,17 @@ public class ProductController
     { // DTO Pattern
         List<ProductDto> productList = iProductService.getProducts();
         return ResponseEntity.ok().body(productList);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponseDto> handleGlobalException(Exception exception, WebRequest webRequest)
+    {
+        ErrorResponseDto errorResponseDto =
+                new ErrorResponseDto(webRequest.getDescription(false),
+                        HttpStatus.INTERNAL_SERVER_ERROR,
+                        exception.getMessage(),
+                        LocalDateTime.now());
+
+        return new ResponseEntity<>(errorResponseDto, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

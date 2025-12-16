@@ -19,22 +19,17 @@ public class ContactServiceImpl implements IContactService
     private final ContactRepository contactRepository;
 
     @Override
-    public boolean saveContact(ContactRequestDto contactRequestDto) {
-        try {
-            Contact contact = transformToEntity(contactRequestDto);
-            contact.setCreatedAt(Instant.now());
-            contact.setCreatedBy(contactRequestDto.getName());
-            contactRepository.save(contact);
-            return true;
-        } catch (Exception exception) {
-            return false;
-        }
-
+    public boolean saveContact(ContactRequestDto contactRequestDto)
+    {
+        Contact contact = transformToEntity(contactRequestDto);
+        contactRepository.save(contact);
+        return true;
     }
 
-    private Contact transformToEntity(ContactRequestDto contactRequestDto) {
+    private Contact transformToEntity(ContactRequestDto contactRequestDto)
+    {
         Contact contact = new Contact();
-        BeanUtils.copyProperties(contactRequestDto, contact);
+        BeanUtils.copyProperties(contactRequestDto, contact);   //transform all the same name field from product to contactDTO
         return contact;
     }
 }

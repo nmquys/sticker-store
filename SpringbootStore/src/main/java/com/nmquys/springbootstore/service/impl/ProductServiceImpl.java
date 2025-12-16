@@ -20,8 +20,7 @@ public class ProductServiceImpl implements IProductService
     @Override
     public List<ProductDto> getProducts()
     {
-        return productRepository.findAll()
-                .stream().map(this::transformToDTO).collect(Collectors.toList());
+        return productRepository.findAll().stream().map(this::transformToDTO).collect(Collectors.toList());
     }
 
     private ProductDto transformToDTO(Product product)

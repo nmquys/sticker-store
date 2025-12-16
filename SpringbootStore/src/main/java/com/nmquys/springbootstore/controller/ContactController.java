@@ -2,6 +2,7 @@ package com.nmquys.springbootstore.controller;
 
 import com.nmquys.springbootstore.dto.ContactRequestDto;
 import com.nmquys.springbootstore.service.IContactService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +19,11 @@ public class ContactController {
     private final IContactService iContactService;
 
     @PostMapping
-    public ResponseEntity<String> saveContact(@RequestBody ContactRequestDto contactRequestDto) {
-        boolean isSaved = iContactService.saveContact(contactRequestDto);
-        if (isSaved) {
-            return ResponseEntity.status(HttpStatus.CREATED).body("Request processed successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An error occurred. Please try again or contact Dev team");
-        }
+    public ResponseEntity<String> saveContact( @Valid @RequestBody ContactRequestDto contactRequestDto)
+    {
+        //ko pass validation cua entities thi khong the chay logic
+        iContactService.saveContact(contactRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Request processed successfully");
     }
 
 }
