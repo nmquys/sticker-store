@@ -11,60 +11,61 @@ export default function About() {
       {/* About Us Content */}
       <p className="leading-6 mb-8 text-gray-600 dark:text-lighter">
         <span className="text-lg font-semibold text-primary dark:text-light">
-          eazy sticker
+          67's Sticker Store
         </span>{" "}
         store is an initiative by{" "}
         <span className="text-lg font-semibold text-primary dark:text-light">
-          Designs by eazybytes
+          Designs by nmquys
         </span>
-        , dedicated to offering you the most sought-after stickers and posters!
+        , made to bring you the most skibidi-approved, eye-catching stickers and
+        posters on the internet.
       </p>
 
       {/* Why Choose Us Section */}
       <h2 className="text-2xl leading-[32px] font-bold text-primary dark:text-light mb-6">
-        Why Choose Us?
+        Why Stick With Us?
       </h2>
 
       {/* Features */}
       <div className="space-y-8">
         {/* Feature: Premium Quality */}
         <div>
-          <h3 className={h3Style}>Premium Quality</h3>
+          <h3 className={h3Style}>Premium Quality (No Cap)</h3>
           <p className={pStyle}>
-            We strive to provide every customer with the utmost satisfaction by
-            delivering high-quality vinyl stickers crafted with care and
-            precision.
+            We don’t do mid. Every vinyl sticker is crafted with care,
+            precision, and top-tier materials for maximum drip and long-lasting
+            vibes.
           </p>
         </div>
 
-        {/* Feature: Product Innovation */}
+        {/* Feature: Next-Level Stickers */}
         <div>
-          <h3 className={h3Style}>Product Innovation</h3>
+          <h3 className={h3Style}>Next-Level Stickers</h3>
           <p className={pStyle}>
-            Our vinyl stickers feature a premium matte or glossy finish
-            lamination and are made with advanced adhesive technology. Designed
-            to withstand all weather conditions and resist scratches, our
-            stickers are gentle enough to preserve the surface of your beloved
-            gadgets.
+            Matte or glossy finish? You choose. Our stickers are laminated,
+            scratch-resistant, weatherproof, and powered by advanced adhesive
+            tech—strong enough to stay put, gentle enough to not wreck your
+            laptop. Clean peel, zero drama.
           </p>
         </div>
 
-        {/* Feature: Excellent Service */}
+        {/* Feature: Service That Slaps */}
         <div>
-          <h3 className={h3Style}>Excellent Service</h3>
+          <h3 className={h3Style}>Service That Slaps</h3>
           <p className={pStyle}>
-            Customer satisfaction is our top priority, and we’re committed to
-            delivering an exceptional shopping experience.
+            Your satisfaction is the main character here. We’re locked in on
+            giving you a smooth, stress-free shopping experience from checkout
+            to unboxing.
           </p>
         </div>
 
-        {/* Feature: Designs You’ll Love */}
+        {/* Feature: Designs That Go Hard */}
         <div>
-          <h3 className={h3Style}>Designs You’ll Love</h3>
+          <h3 className={h3Style}>Designs That Go Hard</h3>
           <p className={pStyle}>
-            With over 1,000 designs, our collection ranges from relatable and
-            seriously funny to delightfully quirky. And we’re just getting
-            started—stay tuned for more exciting products and designs!
+            With 1,000+ designs, we’ve got everything from relatable chaos to
+            seriously funny, brain-rot-approved art. And trust—this is only the
+            warm-up. More drops coming soon.
           </p>
         </div>
       </div>
