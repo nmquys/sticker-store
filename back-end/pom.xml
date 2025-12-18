@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.nmquys</groupId>
-    <artifactId>SpringbootStore</artifactId>
+    <artifactId>back-end</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SpringbootStore</name>
     <description>SpringbootStore</description>
