@@ -20,15 +20,15 @@ Built with **Spring Boot** for the backend and **React + Vite + TailwindCSS** fo
 ### Backend
 
 ```bash
-cd SpringbootStore
-mvn spring-boot:run
+cd back-end
+./mvnw spring-boot:run
 ```
 
 ### Frontend
 
 ```bash
-cd Store_ui
-npm install @vitejs/plugin-react --save-dev
+cd front-end
+npm install
 npm run dev
 ```
 
