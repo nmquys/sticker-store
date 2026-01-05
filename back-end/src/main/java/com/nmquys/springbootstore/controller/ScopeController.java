@@ -10,38 +10,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/scope")
+@RequestMapping("api/v1/scope")
 @RequiredArgsConstructor
-public class ScopeController
-{
+public class ScopeController {
+
     private final RequestScopedBean requestScopedBean;
     private final SessionScopedBean sessionScopedBean;
     private final ApplicationScopedBean applicationScopedBean;
 
     @GetMapping("/request")
-    public ResponseEntity<String> testRequestScope()
-    {
-        requestScopedBean.setUserName("Jane Doe");
+    public ResponseEntity<String> testResquestScope() {
+        requestScopedBean.setUserName("John Doe");
         return ResponseEntity.ok().body(requestScopedBean.getUserName());
     }
 
     @GetMapping("/session")
-    public ResponseEntity<String> testSessionScope()
-    {
-        sessionScopedBean.setUserName("Jane Doe");
+    public ResponseEntity<String> testSessionScope() {
+        sessionScopedBean.setUserName("John Doe");
         return ResponseEntity.ok().body(sessionScopedBean.getUserName());
     }
 
     @GetMapping("/application")
-    public ResponseEntity<Integer> testApplicationScope()
-    {
-        applicationScopedBean.increamentVisitorCount();
+    public ResponseEntity<Integer> testApplicationScope() {
+        applicationScopedBean.incrementVisitorCount();
         return ResponseEntity.ok().body(applicationScopedBean.getVisitorCount());
     }
 
     @GetMapping("/test")
-    public ResponseEntity<String> testScope()
-    {
-        return ResponseEntity.ok().body(requestScopedBean.getUserName());
+    public ResponseEntity<Integer> testScope() {
+        return ResponseEntity.ok().body(applicationScopedBean.getVisitorCount());
     }
 }

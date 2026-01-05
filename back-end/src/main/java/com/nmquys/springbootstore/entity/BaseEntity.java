@@ -1,13 +1,13 @@
 package com.nmquys.springbootstore.entity;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -16,12 +16,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
 
-@Getter
-@Setter
-@MappedSuperclass //not a entity itself help map
+@Getter @Setter
+@MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity
-{
+public class BaseEntity {
+
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreatedDate
     @CreationTimestamp
@@ -32,7 +31,7 @@ public class BaseEntity
     private String createdBy;
 
     @LastModifiedDate
-    @CreatedBy
+    @UpdateTimestamp
     @Column(name = "updated_at", insertable = false)
     private Instant updatedAt;
 

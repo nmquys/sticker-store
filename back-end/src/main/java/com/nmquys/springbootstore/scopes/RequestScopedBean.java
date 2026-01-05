@@ -7,14 +7,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 @Component
-@RequestScope
-@Getter @Setter
+@RequestScope @Getter @Setter
 @Slf4j
-public class RequestScopedBean
-{
+public class RequestScopedBean {
     private String userName;
 
     public RequestScopedBean() {
-        log.info("RequestScopedBean initialized");
+      log.info("RequestScopedBean initialized");
     }
 }

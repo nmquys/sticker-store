@@ -8,8 +8,8 @@ import java.time.Instant;
 
 @Getter
 @Setter
-public class ProductDto
-{
+public class ProductDto {
+
     private Long productId;
     private String name;
     private String description;
@@ -17,4 +17,5 @@ public class ProductDto
     private Integer popularity;
     private String imageUrl;
     private Instant createdAt;
+
 }

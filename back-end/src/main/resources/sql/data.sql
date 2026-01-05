@@ -128,7 +128,7 @@ INSERT INTO products (name, description, price, popularity, image_url, created_a
 VALUES ('Retard Patrick', 'Retarded!', 5.00, 85, '/stickers/retard.png', CURRENT_TIMESTAMP, 'admin', NULL, NULL);
 
 INSERT INTO products (name, description, price, popularity, image_url, created_at, created_by, updated_at, updated_by)
-VALUES ('Wolf tearing shirt', 'Alpha wolf no need shirt!', 9.00, 110, '/stickers/roarwolf.png', CURRENT_TIMESTAMP, 'admin', NULL, NULL);
+VALUES ('Wolf tearing shirt', 'Alpha wolf need no shirt!', 9.00, 110, '/stickers/roarwolf.png', CURRENT_TIMESTAMP, 'admin', NULL, NULL);
 
 INSERT INTO products (name, description, price, popularity, image_url, created_at, created_by, updated_at, updated_by)
 VALUES ('Eminem', 'Rose for you!', 5.00, 60, '/stickers/rose.png', CURRENT_TIMESTAMP, 'admin', NULL, NULL);

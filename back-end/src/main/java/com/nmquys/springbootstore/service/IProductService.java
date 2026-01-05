@@ -4,7 +4,7 @@ import com.nmquys.springbootstore.dto.ProductDto;
 
 import java.util.List;
 
-public interface IProductService
-{
+public interface IProductService {
+
     List<ProductDto> getProducts();
 }

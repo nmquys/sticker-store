@@ -9,19 +9,17 @@ import org.springframework.web.context.annotation.SessionScope;
 
 @Component
 @ApplicationScope
-@Getter @Setter
+@Getter
 @Slf4j
-public class ApplicationScopedBean
-{
+public class ApplicationScopedBean {
+
     private int visitorCount;
 
-    public void increamentVisitorCount()
-    {
+    public void incrementVisitorCount() {
         visitorCount++;
     }
 
-    public ApplicationScopedBean()
-    {
-        log.info("ApplicationScopedBean initialized");
+    public ApplicationScopedBean() {
+      log.info("ApplicationScopedBean initialized");
     }
 }
