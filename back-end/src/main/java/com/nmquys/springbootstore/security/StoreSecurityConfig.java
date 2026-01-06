@@ -26,10 +26,19 @@ import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+/**
+ * class dùng để:
+ *  Phân quyền API theo role
+ *  Cấu hình Spring Security Filter Chain
+ *  Tích hợp JWT filter
+ *  Cấu hình CORS, CSRF, Password, AuthenticationManager
+ */
+
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity  //Cho phép cấu hình Spring Security
 @RequiredArgsConstructor
-public class StoreSecurityConfig {
+public class StoreSecurityConfig
+{
 
     private final List<String> publicPaths;
 
@@ -37,21 +46,31 @@ public class StoreSecurityConfig {
     private String allowedOrigins;
 
     @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
-            throws Exception {
-        return http.csrf(csrfConfig -> csrfConfig.disable())
-                .cors(corsConfig -> corsConfig.configurationSource(corsConfigurationSource()))
-                .authorizeHttpRequests((requests) -> {
-                            publicPaths.forEach(path ->
-                                    requests.requestMatchers(path).permitAll());
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception
+    {
+        return http.csrf(csrfConfig -> csrfConfig.disable())    //disable CSRF
+                .cors(corsConfig -> corsConfig.configurationSource(corsConfigurationSource()))  //enable CORS
+                .authorizeHttpRequests((requests) ->
+                        {
+                            //authorization rules
+                            //public APIs
+                            publicPaths.forEach(path -> requests.requestMatchers(path).permitAll());
+
+                            //Admin APIs
                             requests.requestMatchers("/api/v1/admin/**").hasRole("ADMIN");
+
+                            //Actuator
                             requests.requestMatchers("/stickerstore/actuator/**").hasRole("OPS_ENG");
+
+                            //Swagger
                             requests.requestMatchers("/swagger-ui.html", "/swagger-ui/**",
                             "/v3/api-docs/**").hasAnyRole("DEV_ENG","QA_ENG");
+
+                            //default rule (mặc định phải login)
                             requests.anyRequest().hasAnyRole("USER", "ADMIN");
                         }
                 )
-                .addFilterBefore(new JWTTokenValidatorFilter(publicPaths), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JWTTokenValidatorFilter(publicPaths), BasicAuthenticationFilter.class) //Gắn JWT filter chạy trc BasicAuth, set Authentication từ JWT
                 .formLogin(withDefaults())
                 .httpBasic(withDefaults()).build();
     }
@@ -59,32 +78,40 @@ public class StoreSecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(
-             AuthenticationProvider authenticationProvider) {
+             AuthenticationProvider authenticationProvider)
+    {
         var providerManager = new ProviderManager(authenticationProvider);
         return providerManager;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder()
+    {
         return new BCryptPasswordEncoder();
     }
 
+
+    //Kiểm tra password có bị leak dùng khi register
     @Bean
-    public CompromisedPasswordChecker compromisedPasswordChecker() {
+    public CompromisedPasswordChecker compromisedPasswordChecker()
+    {
         return new HaveIBeenPwnedRestApiPasswordChecker();
     }
 
+
+    //Cấu hình CORS
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+    public CorsConfigurationSource corsConfigurationSource()
+    {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
-        config.setAllowedMethods(Collections.singletonList("*"));
-        config.setAllowedHeaders(Collections.singletonList("*"));
+        config.setAllowedMethods(Collections.singletonList("*"));   //cho phép mọi methods
+        config.setAllowedHeaders(Collections.singletonList("*"));   //cho phép mọi headers
         config.setAllowCredentials(true);
         config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
+        source.registerCorsConfiguration("/**", config);    //Áp dụng toàn bộ API
         return source;
     }
 

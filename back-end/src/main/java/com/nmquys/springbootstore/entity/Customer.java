@@ -13,7 +13,8 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "customers")
-public class Customer extends BaseEntity {
+public class Customer extends BaseEntity
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id", nullable = false)
@@ -49,7 +50,4 @@ public class Customer extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new LinkedHashSet<>();
-
-
-
 }

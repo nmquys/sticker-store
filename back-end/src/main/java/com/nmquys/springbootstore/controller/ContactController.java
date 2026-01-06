@@ -12,14 +12,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/contacts")
 @RequiredArgsConstructor
-public class ContactController {
+public class ContactController
+{
 
     private final IContactService iContactService;
     private final ContactInfoDto contactInfoDto;
 
     @PostMapping
-    public ResponseEntity<String> saveContact(
-            @Valid @RequestBody ContactRequestDto contactRequestDto) {
+    public ResponseEntity<String> saveContact(@Valid @RequestBody ContactRequestDto contactRequestDto)
+    {
         iContactService.saveContact(contactRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Request processed successfully");

@@ -15,7 +15,8 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "roles")
-public class Role extends BaseEntity {
+public class Role extends BaseEntity
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id", nullable = false)
@@ -28,5 +29,4 @@ public class Role extends BaseEntity {
 
     @ManyToMany(mappedBy = "roles")
     private Set<Customer> customers = new LinkedHashSet<>();
-
 }

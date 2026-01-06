@@ -11,7 +11,8 @@ import java.math.BigDecimal;
 @Setter
 @Entity
 @Table(name = "order_items")
-public class OrderItem extends BaseEntity {
+public class OrderItem extends BaseEntity
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id", nullable = false)
@@ -34,5 +35,4 @@ public class OrderItem extends BaseEntity {
     @NotNull
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
-
 }

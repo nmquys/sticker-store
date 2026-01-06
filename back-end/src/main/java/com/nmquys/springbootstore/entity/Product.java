@@ -12,7 +12,8 @@ import java.time.Instant;
 @Setter
 @Entity
 @Table(name = "PRODUCTS")
-public class Product extends BaseEntity {
+public class Product extends BaseEntity
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID", nullable = false)
@@ -32,5 +33,4 @@ public class Product extends BaseEntity {
 
     @Column(name = "IMAGE_URL", length = 500)
     private String imageUrl;
-
 }

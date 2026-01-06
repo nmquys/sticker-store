@@ -11,7 +11,8 @@ import org.springframework.web.context.annotation.SessionScope;
 @ApplicationScope
 @Getter
 @Slf4j
-public class ApplicationScopedBean {
+public class ApplicationScopedBean
+{
 
     private int visitorCount;
 

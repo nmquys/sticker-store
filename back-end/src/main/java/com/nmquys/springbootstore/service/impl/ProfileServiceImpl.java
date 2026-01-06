@@ -16,23 +16,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ProfileServiceImpl implements IProfileService {
+public class ProfileServiceImpl implements IProfileService
+{
 
     private final CustomerRepository customerRepository;
 
     @Override
-    public ProfileResponseDto getProfile() {
+    public ProfileResponseDto getProfile()
+    {
         Customer customer = getAuthenticatedCustomer();
         return mapCustomerToProfileResponseDto(customer);
     }
 
     @Override
-    public ProfileResponseDto updateProfile(ProfileRequestDto profileRequestDto) {
+    public ProfileResponseDto updateProfile(ProfileRequestDto profileRequestDto)
+    {
         Customer customer = getAuthenticatedCustomer();
         boolean isEmailUpdated = !customer.getEmail().equals(profileRequestDto.getEmail().trim());
         BeanUtils.copyProperties(profileRequestDto, customer);
         Address address = customer.getAddress();
-        if (address == null) {
+        if (address == null)
+        {
             address = new Address();
             address.setCustomer(customer);
         }
@@ -48,17 +52,20 @@ public class ProfileServiceImpl implements IProfileService {
         return profileResponseDto;
     }
 
-    public Customer getAuthenticatedCustomer() {
+    public Customer getAuthenticatedCustomer()
+    {
         Authentication authentication =SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         return customerRepository.findByEmail(email).
                 orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    private ProfileResponseDto mapCustomerToProfileResponseDto(Customer customer) {
+    private ProfileResponseDto mapCustomerToProfileResponseDto(Customer customer)
+    {
         ProfileResponseDto profileResponseDto = new ProfileResponseDto();
         BeanUtils.copyProperties(customer, profileResponseDto);
-        if (customer.getAddress() != null) {
+        if (customer.getAddress() != null)
+        {
             AddressDto addressDto = new AddressDto();
             BeanUtils.copyProperties(customer.getAddress(), addressDto);
             profileResponseDto.setAddress(addressDto);

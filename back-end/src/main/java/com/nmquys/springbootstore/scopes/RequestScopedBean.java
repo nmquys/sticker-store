@@ -9,7 +9,8 @@ import org.springframework.web.context.annotation.RequestScope;
 @Component
 @RequestScope @Getter @Setter
 @Slf4j
-public class RequestScopedBean {
+public class RequestScopedBean
+{
     private String userName;
 
     public RequestScopedBean() {

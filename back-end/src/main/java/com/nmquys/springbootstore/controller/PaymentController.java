@@ -18,10 +18,9 @@ public class PaymentController {
     private final IPaymentService iPaymentService;
 
     @PostMapping("/create-payment-intent")
-    public ResponseEntity<PaymentIntentResponseDto> createPaymentIntent(
-            @RequestBody PaymentIntentRequestDto paymentRequest) {
-        PaymentIntentResponseDto response =
-                iPaymentService.createPaymentIntent(paymentRequest);
+    public ResponseEntity<PaymentIntentResponseDto> createPaymentIntent(@RequestBody PaymentIntentRequestDto paymentRequest)
+    {
+        PaymentIntentResponseDto response = iPaymentService.createPaymentIntent(paymentRequest);
         return ResponseEntity.ok(response);
     }
 

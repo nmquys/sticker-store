@@ -7,14 +7,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:stripe.properties")
+@PropertySource("classpath:stripe.properties")  //nạp file từ resources, đưa key value vào env
 public class StripeConfig {
 
-    @Value("${stripe.apiKey}")
+    @Value("${stripe.apiKey}")  //@Value để inject giá trị
     private String apiKey;
 
-    @PostConstruct
+    @PostConstruct  //chạy 1 lần duy nhất khi app start
     public void init() {
         Stripe.apiKey = apiKey;
     }
+
+    //app start -> load stripe.properties -> inject stripe.apiKey vào apiKey -> init()
 }

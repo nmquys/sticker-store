@@ -9,7 +9,8 @@ import java.time.Instant;
 
 @Getter
 @Setter
-public class ContactRequestDto {
+public class ContactRequestDto
+{
 
     @NotBlank(message = "Name cannot be empty")
     @Size(min =5, max = 30, message = "Name must be between 5 and 30 characters")

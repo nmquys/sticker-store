@@ -18,36 +18,59 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Xác thực người dùng khi login bằng username/password
+ * Dùng DB + BCrypt password
+ * chỉ chạy ở profile prod
+ *
+ * username + pwd -> AuthenticationProvider -> DB check + passwordEncoder -> Authenticaiton( SUCCES/FAIL )
+ */
+
+
 @Profile("prod")
 @Component
 @RequiredArgsConstructor
-public class StoreUsernamePwdAuthenticationProvider implements AuthenticationProvider {
+public class StoreUsernamePwdAuthenticationProvider implements AuthenticationProvider
+{
 
     private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException
+    {
         String username = authentication.getName();
         String pwd = authentication.getCredentials().toString();
+
         Customer customer = customerRepository.findByEmail(username).orElseThrow(
                 () -> new UsernameNotFoundException(
                         "User details not found for the user: " + username)
         );
+
         Set<Role> roles = customer.getRoles();
+
         List<SimpleGrantedAuthority> authorities = roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .toList();
-        if(passwordEncoder.matches(pwd, customer.getPasswordHash())) {
-            return new UsernamePasswordAuthenticationToken(customer,null,
-                    authorities);
-        } else {
+
+        //so sánh password đã hash trong DB vs password ng dùng nhập
+        if(passwordEncoder.matches(pwd, customer.getPasswordHash()))
+        {
+            return new UsernamePasswordAuthenticationToken(
+                    customer,
+                    null,
+                    authorities
+            );
+        }
+        else
+        {
             throw new BadCredentialsException("Invalid password!");
         }
     }
 
     @Override
-    public boolean supports(Class<?> authentication) {
+    public boolean supports(Class<?> authentication)
+    {
         return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
     }
 }

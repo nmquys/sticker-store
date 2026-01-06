@@ -18,25 +18,29 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ContactServiceImpl implements IContactService {
+public class ContactServiceImpl implements IContactService
+{
 
     private final ContactRepository contactRepository;
 
     @Override
-    public boolean saveContact(ContactRequestDto contactRequestDto) {
+    public boolean saveContact(ContactRequestDto contactRequestDto)
+    {
         Contact contact = transformToEntity(contactRequestDto);
         contactRepository.save(contact);
         return true;
     }
 
     @Override
-    public List<ContactResponseDto> getAllOpenMessages() {
+    public List<ContactResponseDto> getAllOpenMessages()
+    {
         List<Contact> contacts = contactRepository.fetchByStatus(ApplicationConstants.OPEN_MESSAGE);
         return contacts.stream().map(this::mapToContactResponseDTO).collect(Collectors.toList());
     }
 
     @Override
-    public void updateMessageStatus(Long contactId, String status) {
+    public void updateMessageStatus(Long contactId, String status)
+    {
         Contact contact = contactRepository.findById(contactId).orElseThrow(
                 () -> new ResourceNotFoundException("Contact", "ContactID", contactId.toString())
         );
@@ -44,7 +48,8 @@ public class ContactServiceImpl implements IContactService {
         contactRepository.save(contact);
     }
 
-    private ContactResponseDto mapToContactResponseDTO(Contact contact) {
+    private ContactResponseDto mapToContactResponseDTO(Contact contact)
+    {
         ContactResponseDto responseDTO = new ContactResponseDto(
                 contact.getContactId(),
                 contact.getName(),
@@ -56,7 +61,8 @@ public class ContactServiceImpl implements IContactService {
         return responseDTO;
     }
 
-    private Contact transformToEntity(ContactRequestDto contactRequestDto) {
+    private Contact transformToEntity(ContactRequestDto contactRequestDto)
+    {
         Contact contact = new Contact();
         BeanUtils.copyProperties(contactRequestDto, contact);
         contact.setStatus(ApplicationConstants.OPEN_MESSAGE);

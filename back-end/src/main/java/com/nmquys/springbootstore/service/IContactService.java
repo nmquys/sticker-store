@@ -6,7 +6,8 @@ import com.nmquys.springbootstore.dto.ProductDto;
 
 import java.util.List;
 
-public interface IContactService {
+public interface IContactService
+{
 
     boolean saveContact(ContactRequestDto contactRequestDto);
 

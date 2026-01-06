@@ -15,12 +15,14 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/products")
 @RequiredArgsConstructor
-public class ProductController {
+public class ProductController
+{
 
     private final IProductService iProductService;
 
     @GetMapping
-    public ResponseEntity<List<ProductDto>> getProducts() {
+    public ResponseEntity<List<ProductDto>> getProducts()
+    {
         List<ProductDto> productList = iProductService.getProducts();
         return ResponseEntity.ok().body(productList);
     }

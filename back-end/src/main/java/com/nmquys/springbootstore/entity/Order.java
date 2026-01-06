@@ -14,7 +14,8 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "orders")
-public class Order extends BaseEntity {
+public class Order extends BaseEntity
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id", nullable = false)
@@ -46,5 +47,4 @@ public class Order extends BaseEntity {
     @NotNull
     @Column(name = "order_status", nullable = false, length = 50)
     private String orderStatus;
-
 }

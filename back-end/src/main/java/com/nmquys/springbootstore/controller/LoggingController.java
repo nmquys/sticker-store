@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/logging")
 @Slf4j
-public class LoggingController {
+public class LoggingController
+{
 
     // private static final Logger log = LoggerFactory.getLogger(LoggingController.class);
 
     @GetMapping
-    public ResponseEntity<String> testLogging() {
+    public ResponseEntity<String> testLogging()
+    {
         log.trace("🔍 TRACE: This is a very detailed trace log. Used for tracking execution flow.");
         log.debug("🐞 DEBUG: This is a debug message. Used for debugging.");
         log.info("ℹ️ INFO: This is an informational message. Application events.");

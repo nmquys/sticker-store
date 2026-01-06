@@ -14,18 +14,21 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ProductServiceImpl implements IProductService {
+public class ProductServiceImpl implements IProductService
+{
 
     private final ProductRepository productRepository;
 
     @Cacheable("products")
     @Override
-    public List<ProductDto> getProducts() {
+    public List<ProductDto> getProducts()
+    {
         return productRepository.findAll()
                 .stream().map(this::transformToDTO).collect(Collectors.toList());
     }
 
-    private ProductDto transformToDTO(Product product) {
+    private ProductDto transformToDTO(Product product)
+    {
         ProductDto productDto = new ProductDto();
         BeanUtils.copyProperties(product, productDto);
         productDto.setProductId(product.getId());

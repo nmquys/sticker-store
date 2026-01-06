@@ -6,7 +6,8 @@ import com.nmquys.springbootstore.entity.Order;
 
 import java.util.List;
 
-public interface IOrderService {
+public interface IOrderService
+{
 
     void createOrder(OrderRequestDto orderRequest);
 

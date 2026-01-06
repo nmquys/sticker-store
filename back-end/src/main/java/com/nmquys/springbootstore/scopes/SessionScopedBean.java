@@ -11,7 +11,8 @@ import org.springframework.web.context.annotation.SessionScope;
 @SessionScope
 @Getter @Setter
 @Slf4j
-public class SessionScopedBean {
+public class SessionScopedBean
+{
     private String userName;
 
     public SessionScopedBean() {

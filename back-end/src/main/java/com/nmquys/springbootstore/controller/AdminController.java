@@ -16,18 +16,21 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/admin")
 @RequiredArgsConstructor
-public class AdminController {
+public class AdminController
+{
 
     private final IOrderService iOrderService;
     private final IContactService iContactService;
 
     @GetMapping("/orders")
-    public ResponseEntity<List<OrderResponseDto>> getAllPendingOrders() {
+    public ResponseEntity<List<OrderResponseDto>> getAllPendingOrders()
+    {
         return ResponseEntity.ok().body(iOrderService.getAllPendingOrders());
     }
 
     @PatchMapping("/orders/{orderId}/confirm")
-    public ResponseEntity<ResponseDto> confirmOrder(@PathVariable Long orderId) {
+    public ResponseEntity<ResponseDto> confirmOrder(@PathVariable Long orderId)
+    {
         iOrderService.updateOrderStatus(orderId, ApplicationConstants.ORDER_STATUS_CONFIRMED);
         return ResponseEntity.ok(
                 new ResponseDto("200", "Order #" + orderId + " has been approved.")
@@ -35,7 +38,8 @@ public class AdminController {
     }
 
     @PatchMapping("/orders/{orderId}/cancel")
-    public ResponseEntity<ResponseDto> cancelOrder(@PathVariable Long orderId) {
+    public ResponseEntity<ResponseDto> cancelOrder(@PathVariable Long orderId)
+    {
         iOrderService.updateOrderStatus(orderId, ApplicationConstants.ORDER_STATUS_CANCELLED);
         return ResponseEntity.ok(
                 new ResponseDto("200", "Order #" + orderId + " has been cancelled.")
@@ -43,12 +47,14 @@ public class AdminController {
     }
 
     @GetMapping("/messages")
-    public ResponseEntity<List<ContactResponseDto>> getAllOpenMessages() {
+    public ResponseEntity<List<ContactResponseDto>> getAllOpenMessages()
+    {
         return ResponseEntity.ok(iContactService.getAllOpenMessages());
     }
 
     @PatchMapping("/messages/{contactId}/close")
-    public ResponseEntity<ResponseDto> closeMessage(@PathVariable Long contactId) {
+    public ResponseEntity<ResponseDto> closeMessage(@PathVariable Long contactId)
+    {
         iContactService.updateMessageStatus(contactId, ApplicationConstants.CLOSED_MESSAGE);
         return ResponseEntity.ok(
                 new ResponseDto("200", "Contact #" + contactId + " has been closed.")

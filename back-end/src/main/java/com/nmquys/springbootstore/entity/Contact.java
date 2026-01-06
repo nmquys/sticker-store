@@ -16,7 +16,8 @@ import java.time.Instant;
 @NamedNativeQuery(name = "Contact.findByStatusWithNativeQuery",
         query = "SELECT * FROM contacts WHERE status = :status",
         resultClass = Contact.class)
-public class Contact extends BaseEntity {
+public class Contact extends BaseEntity
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_id", nullable = false)
@@ -36,5 +37,4 @@ public class Contact extends BaseEntity {
 
     @Column(name = "status", nullable = false, length = 50)
     private String status;
-
 }
